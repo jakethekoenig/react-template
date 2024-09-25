@@ -7,6 +7,9 @@
         npm run lint -- --fix
         npm run build
     </precommit>
+    <preview>
+        npm run dev
+    </preview>
     <tools>
         npm run dev
         <comment>Starts the development server</comment>
