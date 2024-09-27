@@ -1,14 +1,17 @@
 <commands>
     <setup>
         npm install
-        npm run build
     </setup>
     <precommit>
         npm run lint -- --fix
         npm run build
     </precommit>
     <preview>
-        npm run dev
+        <process>
+            <name>Dev Preview</name>
+            <command>npm run dev -- --host 0.0.0.0</command>
+            <port>5173</port>
+        </process>
     </preview>
     <tools>
         npm run dev
