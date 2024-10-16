@@ -1,11 +1,4 @@
 <commands>
-    <setup>
-        npm install
-    </setup>
-    <precommit>
-        npm run lint -- --fix
-        npm run build
-    </precommit>
     <preview>
         <process>
             <name>Dev Preview</name>
@@ -13,29 +6,4 @@
             <port>5173</port>
         </process>
     </preview>
-    <tools>
-        npm run dev
-        <comment>Starts the development server</comment>
-
-        npm run preview
-        <comment>Previews the production build locally</comment>
-
-        npm install $NEW_DEPENDENCY
-        <comment>Installs a new production dependency</comment>
-
-        npm install --save-dev $NEW_DEV_DEPENDENCY
-        <comment>Installs a new development dependency</comment>
-
-        npx vite create $NEW_COMPONENT_NAME
-        <comment>Creates a new component using Vite's scaffolding</comment>
-
-        npx tsc --noEmit
-        <comment>Runs TypeScript compiler to check for type errors without emitting files</comment>
-
-        npx eslint $FILE_OR_DIRECTORY
-        <comment>Runs ESLint on a specific file or directory</comment>
-
-        npx vite optimize
-        <comment>Pre-bundles dependencies to improve startup time</comment>
-    </tools>
 </commands>
