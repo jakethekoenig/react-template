@@ -1,9 +1,0 @@
-<commands>
-    <preview>
-        <process>
-            <name>Dev Preview</name>
-            <command>npm run dev -- --host 0.0.0.0</command>
-            <port>5173</port>
-        </process>
-    </preview>
-</commands>
