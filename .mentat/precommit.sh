@@ -1,2 +1,2 @@
 npm run lint -- --fix
-tsc -b
+npx tsc -b
