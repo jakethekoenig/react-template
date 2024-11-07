@@ -1,9 +1,16 @@
 import html2canvas from 'html2canvas';
 
+const allowedOrigins = [
+  'http://localhost',
+  'http://localhost:5173',
+  'https://qa.mentat.ai',
+  'https://mentat.ai',
+];
+
 const setupScreenshotListener = () => {
  window.addEventListener('message', async (event) => {
-   // Only handle takeSnapshot requests from localhost
-   if (event.origin !== 'http://localhost' || 
+  //  Only handle takeSnapshot requests from localhost
+   if (!allowedOrigins.includes(event.origin) || 
        event.data.type !== 'takeSnapshot' || 
        !event.source) {
      return;
@@ -33,6 +40,6 @@ const setupScreenshotListener = () => {
 
 export const initDevTools = () => {
  if (import.meta.env.DEV) {
-   setupScreenshotListener();
+  setupScreenshotListener();
  }
 };
