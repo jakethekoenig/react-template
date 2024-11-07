@@ -17,16 +17,16 @@ const setupScreenshotListener = () => {
        windowHeight: window.innerHeight
      });
      
-     event.source.postMessage({
+     (event.source as Window).postMessage({
        type: 'snapshot',
        imageData: canvas.toDataURL('png')
-     }, event.origin);
+     }, '*');
      
-   } catch (err) {
-     event.source.postMessage({
+   } catch (err: unknown) {
+     (event.source as Window).postMessage({
        type: 'snapshot_error',
-       error: err.message
-     }, event.origin);
+       error: err instanceof Error ? err.message : String(err)
+     }, '*');
    }
  });
 };
