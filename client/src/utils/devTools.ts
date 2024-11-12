@@ -1,18 +1,18 @@
-import html2canvas from 'html2canvas';
+import html2canvas from "html2canvas";
 
 const allowedOrigins = [
-  'http://localhost',
-  'http://localhost:5173',
-  'https://qa.mentat.ai',
-  'https://mentat.ai',
+  "http://localhost",
+  "http://localhost:5173",
+  "https://qa.mentat.ai",
+  "https://mentat.ai",
 ];
 
 const setupScreenshotListener = () => {
-  window.addEventListener('message', async event => {
+  window.addEventListener("message", async event => {
     //  Only handle takeSnapshot requests from localhost
     if (
       !allowedOrigins.includes(event.origin) ||
-      event.data.type !== 'takeSnapshot' ||
+      event.data.type !== "takeSnapshot" ||
       !event.source
     ) {
       return;
@@ -28,18 +28,18 @@ const setupScreenshotListener = () => {
 
       (event.source as Window).postMessage(
         {
-          type: 'snapshot',
-          imageData: canvas.toDataURL('png'),
+          type: "snapshot",
+          imageData: canvas.toDataURL("png"),
         },
-        '*'
+        "*"
       );
     } catch (err: unknown) {
       (event.source as Window).postMessage(
         {
-          type: 'snapshot_error',
+          type: "snapshot_error",
           error: err instanceof Error ? err.message : String(err),
         },
-        '*'
+        "*"
       );
     }
   });
