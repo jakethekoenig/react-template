@@ -1,8 +1,8 @@
-import { render, screen } from "@testing-library/react";
-import { BrowserRouter } from "react-router-dom";
-import Navbar from "../Navbar";
+import { render, screen } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
+import Navbar from '../Navbar';
 
-describe("Navbar Component", () => {
+describe('Navbar Component', () => {
   const renderWithRouter = () => {
     return render(
       <BrowserRouter>
@@ -11,18 +11,18 @@ describe("Navbar Component", () => {
     );
   };
 
-  it("renders website title", () => {
+  it('renders website title', () => {
     renderWithRouter();
-    expect(screen.getByText("Website")).toBeInTheDocument();
+    expect(screen.getByText('Website')).toBeInTheDocument();
   });
 
-  it("renders navigation links", () => {
+  it('renders navigation links', () => {
     renderWithRouter();
-    expect(screen.getByText("Contact")).toBeInTheDocument();
+    expect(screen.getByText('Contact')).toBeInTheDocument();
   });
 
-  it("has correct navigation links", () => {
+  it('has correct navigation links', () => {
     renderWithRouter();
-    expect(screen.getByText("Contact")).toHaveAttribute("href", "/contact");
+    expect(screen.getByText('Contact')).toHaveAttribute('href', '/contact');
   });
 });
