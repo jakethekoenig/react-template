@@ -18,12 +18,12 @@ describe('Home Component', () => {
 
   it('renders notes heading', () => {
     render(<Home />);
-    expect(screen.getByText('Notes')).toBeInTheDocument();
+    expect(screen.getByText('Bulletin Board')).toBeInTheDocument();
   });
 
   it('renders note input form', () => {
     render(<Home />);
-    expect(screen.getByPlaceholderText('Enter a new note...')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("What's on your mind?")).toBeInTheDocument();
     expect(screen.getByText('Add Note')).toBeInTheDocument();
   });
 
@@ -43,7 +43,7 @@ describe('Home Component', () => {
 
     render(<Home />);
 
-    const input = screen.getByPlaceholderText('Enter a new note...');
+    const input = screen.getByPlaceholderText("What's on your mind?");
     const submitButton = screen.getByText('Add Note');
 
     fireEvent.change(input, { target: { value: 'New note' } });

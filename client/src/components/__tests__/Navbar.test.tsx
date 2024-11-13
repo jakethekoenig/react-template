@@ -13,7 +13,7 @@ describe('Navbar Component', () => {
 
   it('renders website title', () => {
     renderWithRouter();
-    expect(screen.getByText('Website')).toBeInTheDocument();
+    expect(screen.getByText('Band Camp')).toBeInTheDocument();
   });
 
   it('renders navigation links', () => {
