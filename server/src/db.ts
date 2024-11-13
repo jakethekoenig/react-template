@@ -1,9 +1,15 @@
 import Database from 'better-sqlite3';
 
+export interface Note {
+  id: number;
+  content: string;
+  timestamp: string;
+}
+
 // Add a function to create a database connection
 export function createDatabase(dbPath?: string) {
   const db = new Database(dbPath || 'notes.db');
-  
+
   // Create notes table if it doesn't exist
   db.exec(`
     CREATE TABLE IF NOT EXISTS notes (
@@ -12,7 +18,7 @@ export function createDatabase(dbPath?: string) {
       timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
     )
   `);
-  
+
   return db;
 }
 

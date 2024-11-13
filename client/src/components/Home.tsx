@@ -6,6 +6,18 @@ interface Note {
   timestamp: string;
 }
 
+const Note = ({ note, onDelete }: { note: Note; onDelete: (id: number) => void }) => (
+  <div key={note.id} className="card">
+    <div style={{ flex: '1', marginRight: '1rem' }}>
+      <p>{note.content}</p>
+      <p className="info">{new Date(note.timestamp).toLocaleString()}</p>
+    </div>
+    <button onClick={() => onDelete(note.id)} className="delete-button">
+      Delete
+    </button>
+  </div>
+);
+
 const Home = () => {
   const [notes, setNotes] = useState<Note[]>([]);
   const [newNote, setNewNote] = useState('');
@@ -46,40 +58,51 @@ const Home = () => {
     }
   };
 
+  const handleDelete = async (id: number) => {
+    try {
+      const response = await fetch(`http://localhost:3000/api/notes/${id}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        fetchNotes();
+      }
+    } catch (error) {
+      console.error('Error deleting note:', error);
+    }
+  };
+
   return (
     <div className="page">
-      <h1>Notes</h1>
+      <h1>Bulletin Board</h1>
 
-      <form onSubmit={handleSubmit} style={{ marginBottom: '2rem', width: '100%' }}>
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          width: '100%',
+          marginBottom: '2rem',
+          display: 'flex',
+          flexDirection: 'row',
+          gap: '1rem',
+        }}
+      >
         <input
           type="text"
           value={newNote}
           onChange={e => setNewNote(e.target.value)}
-          placeholder="Enter a new note..."
-          style={{
-            width: '100%',
-            padding: '0.5rem',
-            marginBottom: '0.5rem',
-            fontSize: '1rem',
-          }}
+          placeholder="What's on your mind?"
+          style={{ flex: '1' }}
         />
-        <button type="submit">Add Note</button>
+        <button type="submit" className="button">
+          Add Note
+        </button>
       </form>
+
+      <hr style={{ width: '100%', marginBottom: '2rem' }} />
 
       <div style={{ width: '100%' }}>
         {notes.map(note => (
-          <div
-            key={note.id}
-            style={{
-              padding: '1rem',
-              marginBottom: '1rem',
-              border: '1px solid #ddd',
-              borderRadius: '4px',
-            }}
-          >
-            <p>{note.content}</p>
-            <small style={{ color: '#666' }}>{new Date(note.timestamp).toLocaleString()}</small>
-          </div>
+          <Note key={note.id} note={note} onDelete={handleDelete} />
         ))}
       </div>
     </div>

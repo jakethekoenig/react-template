@@ -16,7 +16,7 @@ const navbarStyles = {
   title: {
     fontSize: '1.5rem',
     fontWeight: 'bold',
-    color: '#333',
+    color: 'var(--primary-color)',
   },
   links: {
     display: 'flex',
@@ -28,7 +28,7 @@ const Navbar = () => {
   return (
     <nav style={navbarStyles.container}>
       <div style={navbarStyles.title}>
-        <Link to="/">Website</Link>
+        <Link to="/">Band Camp</Link>
       </div>
       <div style={navbarStyles.links}>
         <Link to="/contact">Contact</Link>

@@ -14,7 +14,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 app.use(cors());
 app.use(express.json());
-app.locals.db = db;  // Store the database instance
+app.locals.db = db; // Store the database instance
 
 // API routes
 app.get('/api/notes', (req, res) => {
@@ -31,8 +31,22 @@ app.post('/api/notes', (req, res) => {
   const stmt = app.locals.db.prepare('INSERT INTO notes (content) VALUES (?)');
   const result = stmt.run(content);
 
-  const newNote = app.locals.db.prepare('SELECT * FROM notes WHERE id = ?').get(result.lastInsertRowid);
+  const newNote = app.locals.db
+    .prepare('SELECT * FROM notes WHERE id = ?')
+    .get(result.lastInsertRowid);
   res.status(201).json(newNote);
+});
+
+// Add this new endpoint
+app.delete('/api/notes/:id', (req, res) => {
+  const { id } = req.params;
+  const stmt = app.locals.db.prepare('DELETE FROM notes WHERE id = ?');
+  const result = stmt.run(id);
+
+  if (result.changes === 0) {
+    return res.status(404).json({ error: 'Note not found' });
+  }
+  res.status(204).send();
 });
 
 // Serve static files from the React app

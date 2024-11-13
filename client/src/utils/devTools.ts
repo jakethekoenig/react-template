@@ -1,3 +1,4 @@
+// MENTAT BOT: DO NOT EDIT, DELETE OR RENAME THIS FILE
 import html2canvas from 'html2canvas';
 
 const allowedOrigins = [
