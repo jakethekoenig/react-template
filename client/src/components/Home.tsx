@@ -28,7 +28,7 @@ const Home = () => {
 
   const fetchNotes = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/notes');
+      const response = await fetch('/api/notes');
       const data = await response.json();
       setNotes(data);
     } catch (error) {
@@ -41,7 +41,7 @@ const Home = () => {
     if (!newNote.trim()) return;
 
     try {
-      const response = await fetch('http://localhost:3000/api/notes', {
+      const response = await fetch('/api/notes', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -60,7 +60,7 @@ const Home = () => {
 
   const handleDelete = async (id: number) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/notes/${id}`, {
+      const response = await fetch(`/api/notes/${id}`, {
         method: 'DELETE',
       });
 
