@@ -1,6 +1,23 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import request from 'supertest';
 import { app } from '../index.js';
+import { createDatabase } from '../db.js';
+import Database from 'better-sqlite3';
+
+// Add test database setup and teardown
+let testDb: Database.Database;
+
+beforeEach(() => {
+  // Create an in-memory database for testing
+  testDb = createDatabase(':memory:');
+  // Replace the app's database connection with our test database
+  app.locals.db = testDb;
+});
+
+afterEach(() => {
+  // Close the test database connection
+  testDb.close();
+});
 
 describe('Server API Tests', () => {
   it('GET /api/notes should return all notes', async () => {

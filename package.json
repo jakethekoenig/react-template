@@ -14,7 +14,8 @@
     "lint": "npm run lint --workspaces",
     "lint:fix": "npm run lint:fix --workspaces",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
-    "test": "npm run test --workspaces"
+    "test": "npm run test --workspaces",
+    "start": "npm run start --workspace=server"
   },
   "devDependencies": {
     "@eslint/js": "^9.14.0",
