@@ -16,15 +16,10 @@ describe('Home Component', () => {
     });
   });
 
-  it('renders notes heading', () => {
-    render(<Home />);
-    expect(screen.getByText('Bulletin Board')).toBeInTheDocument();
-  });
-
   it('renders note input form', () => {
     render(<Home />);
     expect(screen.getByPlaceholderText("What's on your mind?")).toBeInTheDocument();
-    expect(screen.getByText('Add Note')).toBeInTheDocument();
+    expect(screen.getByText('Send')).toBeInTheDocument();
   });
 
   it('displays fetched notes', async () => {
@@ -44,7 +39,7 @@ describe('Home Component', () => {
     render(<Home />);
 
     const input = screen.getByPlaceholderText("What's on your mind?");
-    const submitButton = screen.getByText('Add Note');
+    const submitButton = screen.getByText('Send');
 
     fireEvent.change(input, { target: { value: 'New note' } });
     fireEvent.click(submitButton);

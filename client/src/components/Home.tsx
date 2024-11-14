@@ -10,11 +10,13 @@ const Note = ({ note, onDelete }: { note: Note; onDelete: (id: number) => void }
   <div key={note.id} className="card">
     <div style={{ flex: '1', marginRight: '1rem' }}>
       <p>{note.content}</p>
-      <p className="info">{new Date(note.timestamp).toLocaleString()}</p>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <p className="info">{new Date(note.timestamp).toLocaleString()}</p>
+        <a onClick={() => onDelete(note.id)} className="info" style={{ cursor: 'pointer' }}>
+          Delete
+        </a>
+      </div>
     </div>
-    <button onClick={() => onDelete(note.id)} className="delete-button">
-      Delete
-    </button>
   </div>
 );
 
@@ -73,37 +75,60 @@ const Home = () => {
   };
 
   return (
-    <div className="page">
-      <h1>Bulletin Board</h1>
+    <div className="page" style={{ alignItems: 'center' }}>
+      <div style={{ maxWidth: '400px' }}>
+        <form
+          onSubmit={handleSubmit}
+          style={{
+            maxWidth: '100%',
+            marginBottom: '2rem',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-end',
+            backgroundColor: 'white',
+            padding: '1rem',
+            borderRadius: '0.75rem',
+          }}
+        >
+          <textarea
+            value={newNote}
+            onChange={e => setNewNote(e.target.value)}
+            placeholder="What's on your mind?"
+            style={{
+              fontSize: '1rem',
+              lineHeight: '1.5',
+              fontFamily: 'inherit',
+              color: '#1a1a1a',
+              backgroundColor: 'transparent',
+              border: 'none',
+              outline: 'none',
+              overflow: 'auto',
+              minHeight: '100px',
+              width: '100%',
+            }}
+          />
+          <button
+            type="submit"
+            style={{
+              width: '90px',
+              backgroundColor: 'peru',
+              borderRadius: '0.75rem',
+              border: 'none',
+              outline: 'none',
+              padding: '0.5rem',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+            }}
+          >
+            Send
+          </button>
+        </form>
 
-      <form
-        onSubmit={handleSubmit}
-        style={{
-          width: '100%',
-          marginBottom: '2rem',
-          display: 'flex',
-          flexDirection: 'row',
-          gap: '1rem',
-        }}
-      >
-        <input
-          type="text"
-          value={newNote}
-          onChange={e => setNewNote(e.target.value)}
-          placeholder="What's on your mind?"
-          style={{ flex: '1' }}
-        />
-        <button type="submit" className="button">
-          Add Note
-        </button>
-      </form>
-
-      <hr style={{ width: '100%', marginBottom: '2rem' }} />
-
-      <div style={{ width: '100%' }}>
-        {notes.map(note => (
-          <Note key={note.id} note={note} onDelete={handleDelete} />
-        ))}
+        <div style={{ width: '100%' }}>
+          {notes.map(note => (
+            <Note key={note.id} note={note} onDelete={handleDelete} />
+          ))}
+        </div>
       </div>
     </div>
   );
